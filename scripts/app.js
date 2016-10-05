@@ -1,1 +1,1 @@
- var demo = angular.module('twubricApp', ['iso.directives']);
+ var demo = angular.module('twubricApp', ['iso.directives','daterangepicker']);

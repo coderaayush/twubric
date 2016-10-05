@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-  <title>Angular Isotope</title>
+  <title>Twubric - Teamie Demo</title>
   <meta name="description" content=""/>
   <meta name="viewport" content="width=device-width"/>
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles/style.css"/>
-  <link rel="stylesheet" href="styles/bootstrap-datepicker3.min.css"/>
-
+  <!-- <link rel="stylesheet" href="styles/bootstrap-datepicker3.min.css"/> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.13/daterangepicker.min.css" />
 </head>   
-<body ng-app="twubricApp">
+<body ng-app="twubricApp" ng-controller="homecontroller as vm">
 
   <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
@@ -22,9 +22,6 @@
       <script src="scripts/vendor/json3.min.js"></script>
   <![endif]-->
 
-  <div ng-init=
-    "twitterData=[{'uid':1,'username':'sampleuser1','image':'https://lh3.googleusercontent.com/-I1BJYh52Vvc/AAAAAAAAAAI/AAAAAAAAAAA/8bkN374vtYk/s32-c/photo.jpg','fullname':'Sample User One','twubric':{'total':3.5,'friends':1,'influence':1,'chirpiness':1.5},'join_date':1358899200},{'uid':2,'username':'sampleuser2','image':'https://lh3.googleusercontent.com/-I1BJYh52Vvc/AAAAAAAAAAI/AAAAAAAAAAA/8bkN374vtYk/s32-c/photo.jpg','fullname':'Sample User Two','twubric':{'total':5,'friends':1,'influence':1,'chirpiness':1.5},'join_date':1355270400},{'uid':3,'username':'sampleuser3','image':'https://lh3.googleusercontent.com/-I1BJYh52Vvc/AAAAAAAAAAI/AAAAAAAAAAA/8bkN374vtYk/s32-c/photo.jpg','fullname':'Sample User Three','twubric':{'total':7,'friends':1,'influence':1,'chirpiness':1.5},'join_date':1289433600},{'uid':4,'username':'sampleuser4','image':'https://lh3.googleusercontent.com/-I1BJYh52Vvc/AAAAAAAAAAI/AAAAAAAAAAA/8bkN374vtYk/s32-c/photo.jpg','fullname':'Sample User Four','twubric':{'total':9,'friends':2,'influence':3,'chirpiness':4},'join_date':1300838400},{'uid':5,'username':'sampleuser5','image':'https://lh3.googleusercontent.com/-I1BJYh52Vvc/AAAAAAAAAAI/AAAAAAAAAAA/8bkN374vtYk/s32-c/photo.jpg','fullname':'Sample User Five','twubric':{'total':9,'friends':1,'influence':4,'chirpiness':4},'join_date':1230768000},{'uid':6,'username':'sampleuser6','image':'https://lh3.googleusercontent.com/-I1BJYh52Vvc/AAAAAAAAAAI/AAAAAAAAAAA/8bkN374vtYk/s32-c/photo.jpg','fullname':'Sample User Six','twubric':{'total':6,'friends':2,'influence':3,'chirpiness':1},'join_date':1252454400},{'uid':7,'username':'sampleuser7','image':'https://lh3.googleusercontent.com/-I1BJYh52Vvc/AAAAAAAAAAI/AAAAAAAAAAA/8bkN374vtYk/s32-c/photo.jpg','fullname':'Sample User Seven','twubric':{'total':8,'friends':2,'influence':4,'chirpiness':2},'join_date':1278201600},{'uid':8,'username':'sampleuser8','image':'https://lh3.googleusercontent.com/-I1BJYh52Vvc/AAAAAAAAAAI/AAAAAAAAAAA/8bkN374vtYk/s32-c/photo.jpg','fullname':'Sample User Eight','twubric':{'total':7,'friends':2,'influence':3,'chirpiness':2},'join_date':1331510400},{'uid':9,'username':'sampleuser9','image':'https://lh3.googleusercontent.com/-I1BJYh52Vvc/AAAAAAAAAAI/AAAAAAAAAAA/8bkN374vtYk/s32-c/photo.jpg','fullname':'Sample User Nine','twubric':{'total':8,'friends':1,'influence':4,'chirpiness':3},'join_date':1367971200},{'uid':10,'username':'sampleuser10','image':'https://lh3.googleusercontent.com/-I1BJYh52Vvc/AAAAAAAAAAI/AAAAAAAAAAA/8bkN374vtYk/s32-c/photo.jpg','fullname':'Sample User Ten','twubric':{'total':5,'friends':1,'influence':1,'chirpiness':3},'join_date':1228953600}] ">
-  </div>
   
   <div class="header">
     <div class="container">
@@ -41,18 +38,21 @@
       <div class="row">
         <div class="col-md-8 col-md-offset-2 btn-group" opt-kind="" ok-key="sortBy">
           <p class="sortby-label"><span>Sort By : </span></p>
-          <button type="button" onclick="highlightTag('total');" class="btn btn-default toggle-btn"  ok-sel="[total]" ok-type="integer">Twubric Score</button>
-          <button type="button" onclick="highlightTag('friends');" class="btn btn-default toggle-btn" ok-sel="[friends]" ok-type="integer">Friends</button>
-          <button onclick="highlightTag('influence');" class="btn btn-default toggle-btn" ok-sel="[influence]" ok-type="integer">Influence</button>
-          <button onclick="highlightTag('chirpiness');" class="btn btn-default toggle-btn" ok-sel="[chirpiness]" ok-type="float">Chirpiness</button>
+          <button type="button" data-value="total" ng-click="vm.highlightTag($event)" class="btn btn-default toggle-btn"  ok-sel="[total]" ok-type="integer">Twubric Score</button>
+          <button type="button" data-value="friends" ng-click="vm.highlightTag($event)" class="btn btn-default toggle-btn" ok-sel="[friends]" ok-type="integer">Friends</button>
+          <button data-value="influence" ng-click="vm.highlightTag($event)" class="btn btn-default toggle-btn" ok-sel="[influence]" ok-type="integer">Influence</button>
+          <button data-value="chirpiness" ng-click="vm.highlightTag($event)" class="btn btn-default toggle-btn" ok-sel="[chirpiness]" ok-type="float">Chirpiness</button>
         </div>
       </div>
       <div class="row">
         <div class="col-md-8 col-md-offset-2 join-date-box">
           <div class="col-md-12 form-group form-group-filled sortbox" id="event_period" >
             <p><span class="date-filter-label">Joined Twitter Between</span></p>
-            <div class="col-md-6"><input type="text" class="actual_range form-control" id="start-date-input" class="" placeholder="Pick Start Date"></div>
+<!--             <div class="col-md-6"><input type="text" class="actual_range form-control" id="start-date-input" class="" placeholder="Pick Start Date"></div>
             <div class="col-md-6"><input type="text" class="actual_range form-control" id="end-date-input" placeholder="Pick End Date"></div>
+          </div> -->
+          <div class="col-md-10">
+            <input date-range-picker id="daterange1" name="daterange1" class="form-control date-picker" type="text" ng-model="date">
           </div>
         </div>
       </div>
@@ -63,7 +63,7 @@
                   <div class="names">{{x.username}}</div>
               </li> -->
 
-           <div class="col-md-3 grid-box kindling" ng-repeat="data in twitterData" isotope-item="isotope-item">
+           <div class="col-md-3 grid-box kindling" ng-repeat="data in vm.twitterData" isotope-item="isotope-item">
             <div class="grid-block">
               <div class="grid-block-header">
                 <p><span>{{data.fullname}}</span><span style="float:right" class="total" total="{{data.twubric.total}}">{{data.twubric.total}}</span></p>
@@ -84,7 +84,7 @@
               </div>
                 <div class="grid-block-footer clearfix">
                 <div class="grid-block-footer-left"><p class="date" date="{{data.join_date}}">{{data.join_date | date}}</p></div>
-                <div class="grid-block-footer-right"><a onclick="removeItem(this)" class="uid" uid="{{data.uid}}">Remove</a></div>
+                <div class="grid-block-footer-right"><a ng-click="vm.removeElement($event)" class="uid" uid="{{data.uid}}">Remove</a></div>
               </div>
             </div>
            </div>
@@ -97,97 +97,22 @@
 
 
   <script src="scripts/jquery.min.js"></script>
-  <script>
-    // var removeItem = function(elem) {
-    //   if (!Array.prototype.filter) return;
-    //   var s=angular.element('#isotopeContainer').scope();
-    //   var number = angular.element(elem).find(".uid").attr("uid");
-    //   var items = s.twitterData.filter(function( obj ) {
-    //     return +obj.number != +number;
-    //   });
-    //   s.lastNumber = s.lastNumber || [];
-    //   s.lastNumber.unshift(number);
-    //   s.$apply(s.twitterData = items);
-    // };
-  </script>
-
 
   <script src="scripts/angular.min.js"></script>
   <script src="scripts/jquery.isotope.js"></script>
   <script src="scripts/angular-isotope.js"></script>
   <script src="scripts/app.js"></script>
-  <script src="scripts/bootstrap-datepicker.min.js"></script>
+  <!-- <script src="scripts/bootstrap-datepicker.min.js"></script> -->
+  
+  <!-- factories -->
+  <script src="localdata.factory.js"></script>
 
-  <script type="text/javascript">
-  $( document ).ready(function() {
-    $('#event_period').datepicker({
-      inputs: $('.actual_range')}).on('changeDate', function(e) {
-          console.log('range  date picked');
-          $('.grid-container').isotope({ filter: function() {
-          var cDate = Date.parse($(this).find('.date').text());
-          var startdate = Date.parse($('#start-date-input').val());
-          var enddate = Date.parse($('#end-date-input').val());
-          console.log(cDate);
-          if((cDate <= enddate && cDate >= startdate)) {
-            console.log('true');
-            return true;
-          }
-          return false;
-        } })
-      });
-  });
-  </script>
-    <script>
-      var removeItem = function(elem) {
-      if (confirm('Are you sure you want to remove this data')) {
-        if (!Array.prototype.filter) return;
-        var s=angular.element('#isotopeContainer').scope();
-        console.log(s);
-        var number = angular.element(elem).attr("uid");
-        var items = s.twitterData.filter(function( obj ) {
-          return +obj.uid != +number;
-        });
-        s.lastNumber = s.lastNumber || [];
-        s.lastNumber.unshift(number);
-        s.$apply(s.twitterData = items);
-      }
-    };
+  <!-- controllers -->
+  <script src="homecontroller.js"></script>
 
-  </script>
-  <script type="text/javascript">
-    function highlightTag(btnVal){
-      console.log('btn value :'+btnVal);
-      switch(btnVal){
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.13/daterangepicker.min.js"></script>
+  <script src="scripts/angular-daterangepicker.min.js"></script>
 
-        case 'total':
-          $('.total').addClass('highlight');        
-          $('.grid-block-mid-box:first-child').removeClass('highlight');
-          $('.grid-block-mid-box:nth-child(2)').removeClass('highlight');
-          $('.grid-block-mid-box:nth-child(3)').removeClass('highlight');
-          break;
-
-        case 'friends':
-          $('.total').removeClass('highlight');        
-          $('.grid-block-mid-box:first-child').addClass('highlight');
-          $('.grid-block-mid-box:nth-child(2)').removeClass('highlight');
-          $('.grid-block-mid-box:nth-child(3)').removeClass('highlight');
-          break;
-
-        case 'influence':
-          $('.total').removeClass('highlight');        
-          $('.grid-block-mid-box:first-child').removeClass('highlight');
-          $('.grid-block-mid-box:nth-child(2)').addClass('highlight');
-          $('.grid-block-mid-box:nth-child(3)').removeClass('highlight');
-          break;
-
-        case 'chirpiness':
-          $('.total').removeClass('highlight');        
-          $('.grid-block-mid-box:first-child').removeClass('highlight');
-          $('.grid-block-mid-box:nth-child(2)').removeClass('highlight');
-          $('.grid-block-mid-box:nth-child(3)').addClass('highlight');
-          break;
-        }
-    }
-  </script>
 </body>
 </html>
